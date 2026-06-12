@@ -16,7 +16,7 @@ try {
     console.log(error);
 }
 
-sequelize.sync({ force: false })
+sequelize.sync({ force: false, alter: false })  // alter : true helps to keep the data and update the column 
     .then(() => {
         console.log("Database Synced Successfully!");
     })
