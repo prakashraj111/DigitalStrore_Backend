@@ -49,7 +49,7 @@ class UserMiddleware {
         })
     }
 
-    async restrictTo(...roles:Role[]){
+    accessTo(...roles:Role[]){
         return (req: IExtendedRequest, res: Response, next: NextFunction) => {
             const userRole = req.user?.role as Role
             if(!roles.includes(userRole)){

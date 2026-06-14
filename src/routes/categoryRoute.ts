@@ -5,10 +5,10 @@ const router:Router = express.Router()
 
 router.route("/")
 	.get(categoryController.getCategories)
-	.post(userMiddleware.isUserLoggedIn as any, userMiddleware.restrictTo(Role.Admin) as any, categoryController.addCategory)
+	.post(userMiddleware.isUserLoggedIn, userMiddleware.accessTo(Role.Admin), categoryController.addCategory)
     
 router.route("/:id")
-    .patch(userMiddleware.isUserLoggedIn,userMiddleware.restrictTo(Role.Admin) as any, categoryController.updateCategory)
-    .delete(userMiddleware.isUserLoggedIn,userMiddleware.restrictTo(Role.Admin) as any, categoryController.deleteCategory)
+    .patch(userMiddleware.isUserLoggedIn, userMiddleware.accessTo(Role.Admin), categoryController.updateCategory)
+    .delete(userMiddleware.isUserLoggedIn, userMiddleware.accessTo(Role.Admin), categoryController.deleteCategory)
 
 export default router 
