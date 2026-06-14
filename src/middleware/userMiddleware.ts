@@ -50,12 +50,18 @@ class UserMiddleware {
     }
 
     async restrictTo(...roles:Role[]){
-        return  (req: IExtendedRequest, res: Response, next:NextFunction)=>{
-            let userRole = req.user?.role as Role
-            console.log("Role" + userRole);
+        return (req: IExtendedRequest, res: Response, next: NextFunction) => {
+            const userRole = req.user?.role as Role
+            if(!roles.includes(userRole)){
+                res.status(403).json({
+                    message : "You don't have permission!"
+                })
+                return
+            }
+            next()
         }
     }
 
 }
 
-export default new UserMiddleware
+export default new UserMiddleware()
